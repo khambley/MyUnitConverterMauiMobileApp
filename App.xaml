@@ -11,6 +11,7 @@
             </ResourceDictionary.MergedDictionaries>
             <FontImage x:Key="DollarIcon" FontFamily="FontAwesome" Glyph="&#x24;" Size="22" Color="Black" />
             <FontImage x:Key="SterlingIcon" FontFamily="FontAwesome" Glyph="&#xf154;" Size="22" Color="Black" />
+            <FontImage x:Key="DownArrowIcon" FontFamily="FontAwesome" Glyph="&#xf063;" Size="22" Color="Black" />
             <ResourceDictionary>
                 <Style TargetType="NavigationPage">
                     <Setter Property="BarBackgroundColor" Value="Black" />

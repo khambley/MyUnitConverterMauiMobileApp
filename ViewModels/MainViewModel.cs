@@ -18,7 +18,7 @@ namespace MyUnitConverter.ViewModels
 		ObservableCollection<string>? baseNames;
 
 		[ObservableProperty]
-		decimal unitValue;
+		string? unitValue;
 
 		[ObservableProperty]
 		string? selectedFromCurrency;
@@ -27,14 +27,44 @@ namespace MyUnitConverter.ViewModels
         string? selectedToCurrency;
 
         [ObservableProperty]
-        decimal conversionResult;
+        string? convertionRate;
+
+        [ObservableProperty]
+        string? conversionResult;
+
+        [ObservableProperty]
+        bool isVisibleDownArrow;
+
+        [ObservableProperty]
+        string? deviceLocalTime;
+
+        [ObservableProperty]
+        string? convertLocalTimeToMilitary;
+
+        [ObservableProperty]
+        string? chicagoLocalTime;
+
+        [ObservableProperty]
+        string? chicagoMilitaryTime;
 
         public MainViewModel(IRateService rateService)
 		{
 			this.rateService = rateService;
 			SetBaseNames();
+            IsVisibleDownArrow = false;
+            DeviceLocalTime = DateTime.UtcNow.ToLocalTime().ToString("t");
+            ConvertLocalTimeToMilitary = DateTime.UtcNow.ToLocalTime().ToString("HH:mm:ss");
+            ConvertLocalToCentralTime();
 			
 		}
+
+        public void ConvertLocalToCentralTime()
+        {
+            var localTime = DateTime.UtcNow.ToLocalTime();
+            var timezone = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago");
+            ChicagoLocalTime = TimeZoneInfo.ConvertTime(localTime, timezone).ToString("t");
+            ChicagoMilitaryTime = TimeZoneInfo.ConvertTime(localTime, timezone).ToString("HH:mm:ss");
+        }
 
         private void SetBaseNames()
         {
@@ -61,6 +91,7 @@ namespace MyUnitConverter.ViewModels
             if(CurrencyRate != null)
             {
                 await ConvertRate();
+                IsVisibleDownArrow = true;
             }
             else
             {
@@ -111,7 +142,7 @@ namespace MyUnitConverter.ViewModels
                     break;
             }
 
-            ConversionResult = UnitValue * convertRate;
+            ConversionResult = (decimal.Parse(UnitValue) * convertRate).ToString("F2");
         }
 
 
