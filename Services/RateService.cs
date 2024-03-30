@@ -20,10 +20,11 @@ namespace MyUnitConverter.Services
 		{
 		}
 
-        public async Task<CurrencyRate> GetRates()
+        public async Task<CurrencyRate> GetRates(string selectedBase)
         {
+            
             CurrencyRate result = new CurrencyRate();
-            string url = UriBase + "/rates/latest?apikey=" + Settings.NewsApiKey;
+            string url = $"{UriBase}/rates/latest?apikey={Settings.NewsApiKey}&symbols=MXN,GBP,EUR,BTC,CAD,JPY,RUB,USD&base={selectedBase}";
             try
             {
                 result = await httpClient.GetFromJsonAsync<CurrencyRate>(url);

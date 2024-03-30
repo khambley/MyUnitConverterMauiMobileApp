@@ -5,7 +5,8 @@ namespace MyUnitConverter.Services
 {
 	public interface IRateService
 	{
-		public Task<CurrencyRate> GetRates();
-	}
+		public Task<CurrencyRate> GetRates(string selectedBase);
+
+    }
 }
 

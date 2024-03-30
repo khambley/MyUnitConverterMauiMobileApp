@@ -14,20 +14,44 @@
                    />
             <Entry x:Name="unitValue"
                    Placeholder="Enter a value to convert"
-                   Margin="0,0,0,15" />
+                   Margin="0,0,0,15"
+                   Text="{Binding UnitValue}"
+                   FontSize="Large"
+                   ClearButtonVisibility="WhileEditing" />
 
             <Label Text="From" />
             <Picker x:Name="fromUnitPicker"
                     Margin="0,0,0,15"
-                    ItemsSource="{Binding CurrencyNames}"/>
+                    ItemsSource="{Binding BaseNames}"
+                    SelectedItem="{Binding SelectedFromCurrency}"
+                    FontSize="Large"
+                    />
 
             <Label Text="To" />
             <Picker x:Name="toUnitPicker"
-                    Margin="0,0,0,15"/>
+                    Margin="0,0,0,15"
+                    ItemsSource="{Binding BaseNames}"
+                    SelectedItem="{Binding SelectedToCurrency}"
+                    FontSize="Large"
+                    />
 
             <Button x:Name="convertButton"
                     Text="Convert"
-                    Command="{Binding GetRatesCommand}"/>
+                    Command="{Binding GetRatesCommand}"
+                    Margin="0,0,0,15" />
+
+            
+            <Label FontSize="28"
+                   HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding UnitValue, StringFormat='{0:F2}'}" />
+                        <Span Text=" = " />
+                        <Span Text="{Binding ConversionResult, StringFormat='{0:F3}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
         </VerticalStackLayout>
     </ScrollView>
 
