@@ -76,11 +76,13 @@
 	  <None Remove="Resources\Fonts\FontAwesome.otf" />
 	  <None Remove="Models\" />
 	  <None Remove="Services\" />
+	  <None Remove="Converters\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="Services\" />
+	  <Folder Include="Converters\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Fonts\FontAwesome.otf" />

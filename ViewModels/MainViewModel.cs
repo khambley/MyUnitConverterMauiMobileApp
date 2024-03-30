@@ -54,45 +54,64 @@ namespace MyUnitConverter.ViewModels
         [RelayCommand]
 		public async Task GetRatesAsync()
 		{
-			var newBaseFrom = SelectedFromCurrency?.Split(' ')[0];
-            var newBaseTo = SelectedToCurrency?.Split(' ')[0];
+            var newBaseFrom = SplitBaseString(SelectedFromCurrency ?? "");
 
             CurrencyRate = await rateService.GetRates(newBaseFrom ?? "");
 
+            if(CurrencyRate != null)
+            {
+                await ConvertRate();
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Currency Rate cannot be null", "OK");
+            }
+            
+        }
+
+        public string SplitBaseString(string s)
+        {
+            return s.Split(' ')[0];
+        }
+
+        public async Task ConvertRate()
+        {
+            var newBaseTo = SplitBaseString(SelectedToCurrency ?? "");
+
             decimal convertRate = 0;
-		
-			switch (newBaseTo)
-			{
-				case "MXN":
-					convertRate = decimal.Parse(CurrencyRate.Rate?.MXN != null ? CurrencyRate.Rate.MXN : "");
-					break;
-				case "GBP":
-                    convertRate = decimal.Parse(CurrencyRate.Rate?.GBP != null ? CurrencyRate.Rate.GBP : "");
+            
+            switch (newBaseTo)
+            {
+                case "MXN":
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.MXN != null ? CurrencyRate.Rate.MXN : "");
+                    break; // Curse you null safety ;)
+                case "GBP":
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.GBP != null ? CurrencyRate.Rate.GBP : "");
                     break;
                 case "EUR":
-                    convertRate = decimal.Parse(CurrencyRate.Rate?.EUR != null ? CurrencyRate.Rate.EUR : "");
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.EUR != null ? CurrencyRate.Rate.EUR : "");
                     break;
                 case "BTC":
-                    convertRate = decimal.Parse(CurrencyRate.Rate?.BTC != null ? CurrencyRate.Rate.BTC : "");
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.BTC != null ? CurrencyRate.Rate.BTC : "");
                     break;
                 case "CAD":
-                    convertRate = decimal.Parse(CurrencyRate.Rate.CAD);
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.CAD != null ? CurrencyRate.Rate.CAD : "");
                     break;
                 case "JPY":
-                    convertRate = decimal.Parse(CurrencyRate.Rate.JPY);
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.JPY != null ? CurrencyRate.Rate.JPY : "");
                     break;
                 case "RUB":
-                    convertRate = decimal.Parse(CurrencyRate.Rate.RUB);
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.RUB != null ? CurrencyRate.Rate.RUB : "");
                     break;
                 case "USD":
-                    convertRate = decimal.Parse(CurrencyRate.Rate.USD);
+                    convertRate = decimal.Parse(CurrencyRate?.Rate?.USD != null ? CurrencyRate.Rate.USD : "");
                     break;
                 default:
-                    Application.Current.MainPage.DisplayAlert("Error", "No matching currency found", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Error", "No matching currency found", "OK");
                     break;
             }
 
-            ConversionResult = unitValue * convertRate;
+            ConversionResult = UnitValue * convertRate;
         }
 
 

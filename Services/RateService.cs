@@ -24,6 +24,7 @@ namespace MyUnitConverter.Services
         {
             
             CurrencyRate result = new CurrencyRate();
+
             string url = $"{UriBase}/rates/latest?apikey={Settings.NewsApiKey}&symbols=MXN,GBP,EUR,BTC,CAD,JPY,RUB,USD&base={selectedBase}";
             try
             {
