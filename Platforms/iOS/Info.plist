@@ -31,6 +31,6 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.superdesigngirl.myunitconverter</string>
 	<key>CFBundleDisplayName</key>
-	<string>MyConverter</string>
+	<string>MyConverterApp</string>
 </dict>
 </plist>

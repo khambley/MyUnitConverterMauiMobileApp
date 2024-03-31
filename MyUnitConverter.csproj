@@ -21,10 +21,10 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>MyConverter</ApplicationTitle>
+		<ApplicationTitle>MyConverterApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mycurrencyconverter</ApplicationId>
+		<ApplicationId>com.superdesigngirl.myunitconverter</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
