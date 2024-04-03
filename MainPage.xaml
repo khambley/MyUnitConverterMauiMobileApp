@@ -5,17 +5,17 @@
              x:Class="MyUnitConverter.MainPage"
              xmlns:converters="clr-namespace:MyUnitConverter.Converters"
              x:DataType="viewModels:MainViewModel"
-             Title="My Unit Converter">
+             Title="Currency Converter">
     <ContentPage.Resources>
         <converters:CurrencySignConverter x:Key="currencySignConverter" />
     </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout HorizontalOptions="Fill" Padding="20, 10, 20, 10">
-            <Label Text="Currency Converter"
+            <!--<Label Text="Currency Converter"
                    Margin="0,20,0,20"
                    HorizontalTextAlignment="Center"
-                   />
+                   />-->
             <Entry x:Name="unitValue"
                    Placeholder="Enter a value to convert"
                    Margin="0,0,0,15"
@@ -85,7 +85,9 @@
                    TextColor="LimeGreen"
                    FontSize="26"
                    FontAttributes="Bold"
-                   Padding="20" />
+                   Padding="20"
+                   MinimumWidthRequest="160"
+                   HorizontalTextAlignment="Center" />
 
                 <Label Text="&#xf0ec;"
                    FontFamily="FontAwesome"
@@ -100,7 +102,9 @@
                        TextColor="LimeGreen"
                        FontSize="26"
                        FontAttributes="Bold"
-                       Padding="10" />
+                       Padding="10"
+                       MinimumWidthRequest="160"
+                       HorizontalTextAlignment="Center" />
             </HorizontalStackLayout>
 
             <Label Text="The time in Chicago (CST) is: "
@@ -114,7 +118,9 @@
                    TextColor="LimeGreen"
                    FontSize="26"
                    FontAttributes="Bold"
-                   Padding="20" />
+                   Padding="20"
+                   MinimumWidthRequest="160"
+                   HorizontalTextAlignment="Center" />
 
                 <Label Text="&#xf0ec;"
                    FontFamily="FontAwesome"
@@ -122,14 +128,16 @@
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"
                    FontSize="30"
-                   Padding="10,5,10,0"/>
+                   Padding="10,5,10,0" />
 
                 <Label Text="{Binding ChicagoMilitaryTime}"
                        BackgroundColor="Black"
                        TextColor="LimeGreen"
                        FontSize="26"
                        FontAttributes="Bold"
-                       Padding="10" />
+                       Padding="10"
+                       MinimumWidthRequest="160"
+                       HorizontalTextAlignment="Center"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

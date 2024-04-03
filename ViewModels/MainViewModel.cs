@@ -47,23 +47,33 @@ namespace MyUnitConverter.ViewModels
         [ObservableProperty]
         string? chicagoMilitaryTime;
 
+        private Timer _timer;
+        private Timer _localtimer;
+
         public MainViewModel(IRateService rateService)
 		{
 			this.rateService = rateService;
 			SetBaseNames();
             IsVisibleDownArrow = false;
+            _localtimer = new Timer(ConvertLocalTime, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            
+            // Create a timer that repeats every second
+            _timer = new Timer(ConvertLocalToCentralTime, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+
+        }
+        
+        public void ConvertLocalTime(object state)
+        {
             DeviceLocalTime = DateTime.UtcNow.ToLocalTime().ToString("t");
             ConvertLocalTimeToMilitary = DateTime.UtcNow.ToLocalTime().ToString("HH:mm:ss");
-            ConvertLocalToCentralTime();
-			
-		}
-
-        public void ConvertLocalToCentralTime()
+        }
+        public void ConvertLocalToCentralTime(object state)
         {
             var localTime = DateTime.UtcNow.ToLocalTime();
             var timezone = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago");
             ChicagoLocalTime = TimeZoneInfo.ConvertTime(localTime, timezone).ToString("t");
             ChicagoMilitaryTime = TimeZoneInfo.ConvertTime(localTime, timezone).ToString("HH:mm:ss");
+            
         }
 
         private void SetBaseNames()
